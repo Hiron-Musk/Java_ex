@@ -3,7 +3,7 @@ package sec02.test03;
 public class DaoExample {
 
 	public static void dbWork(DataAccessObject dao) {
-		dao.slect();
+		dao.select();
 		dao.insert();
 		dao.update();
 		dao.delete();
