@@ -14,16 +14,12 @@ public class ObjectStreamExample {
 		for(Board board:list) {
 			System.out.println(
 			board.getBno()+"\t"+board.getTitle()+"\t"+
-			board.getContet+"\t"+board.getWriter()+"\t"+
-					sdf.format(board.getDate())
-					);
+			board.getContent()+"\t"+board.getWriter()+"\t"+
+			sdf.format(board.getDate())
+			);
 		}
 	}
 	
-	
-	
-
-
 	public static void writeList() throws Exception{
 		List<Board> list=new ArrayList<>();
 		
@@ -32,12 +28,19 @@ public class ObjectStreamExample {
 		list.add(new Board(3,"제목3","내용3","글쓴이3",new Date()));
 		
 		FileOutputStream fos=new FileOutputStream("C:/Temp/board.db");
+		ObjectOutputStream oos=new ObjectOutputStream(fos);
+		oos.writeObject(list);
+		oos.flush();
+		oos.close();
 		
 	}
 	
-	public static List<Board> readList() {
-		// TODO Auto-generated method stub
-		return null;
+	public static List<Board> readList() throws Exception{
+		
+		FileInputStream fis=new FileInputStream("C:/Temp/board.db");
+		ObjectInputStream ois=new ObjectInputStream(fis);
+		List<Board> list=(List<Board>)ois.readObject();
+		return list;
 	}
 
 }
